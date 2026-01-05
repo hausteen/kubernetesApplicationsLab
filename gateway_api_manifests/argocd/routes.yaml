@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
     - name: traefik
-      sectionName: http
+      sectionName: https
   rules:
     - matches:
       - path:
@@ -15,4 +15,4 @@ spec:
       backendRefs:
       - name: argocd-server
         namespace: argocd
-        port: 80
+        port: 443
