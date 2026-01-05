@@ -52,10 +52,6 @@ spec:
               sanitizePath: true
             tls:
               enabled: true # figure out how to make traefik create its own self signed certificate
-        additionalArguments:
-          - "--entryPoints.web.http.redirections.to=websecure"
-          - "--entryPoints.web.http.redirections.scheme=https"
-          - "--entryPoints.web.http.redirections.permanent=true"
         securityContext:
           seccompProfile:
             type: RuntimeDefault
