@@ -25,4 +25,4 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: secret-tls
-            namespace: traefik
+            namespace: argocd
