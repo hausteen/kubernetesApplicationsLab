@@ -15,6 +15,8 @@ spec:
     chart: traefik
     helm:
       valuesObject: # using this instead of the values.yaml file since the file was not working. https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+        additionalArguments:
+          - "--serversTransport.insecureSkipVerify=true"
         api:
           dashboard: true # enable the dashboard
         service:
@@ -47,6 +49,7 @@ spec:
         ports: # these need to exist for the gateway api 'gateway listeners'
           web:
             port: 80
+            redirectTo: websecure
           websecure:
             port: 443
             http:
