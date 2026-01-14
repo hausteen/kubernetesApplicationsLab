@@ -3,7 +3,7 @@ kind: Kustomization
 helmCharts:
   - name: cilium
     repo: https://helm.cilium.io/
-    version: v1.34.0
+    version: 1.34.0
     namespace: kube-system
     includeCRDs: true
     valuesFile: values.yaml
