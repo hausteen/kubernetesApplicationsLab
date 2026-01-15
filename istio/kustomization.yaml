@@ -2,6 +2,7 @@
 # will also install "waypoint" proxies as well
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: istio-system
 helmCharts:
   - name: base
     repo: https://istio-release.storage.googleapis.com/charts

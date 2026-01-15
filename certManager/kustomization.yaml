@@ -5,3 +5,7 @@ resources:
   - resources/selfsignedIssuer.yaml
   - resources/selfsignedRootCaCertificate.yaml
   - resources/huntInternalClusterIssuer.yaml
+  - resources/huntInternalDevelopmentHomeTlsTerminationCertificate.yaml
+  - resources/huntInternalDevelopmentLabTlsTerminationCertificate.yaml
+  - resources/huntInternalProductionHomeTlsTerminationCertificate.yaml
+  - resources/huntInternalProductionLabTlsTerminationCertificate.yaml
