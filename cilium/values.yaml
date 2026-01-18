@@ -2,15 +2,9 @@ cgroup: # needed for talos
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
-bpf:
-  masquerade: false # needed for istio
 cluster:
   name: home
   id: 1
-cni:
-  exclusive: false # needed for istio
-socketLB:
-  hostNamespaceOnly: true # needed for istio
 hubble:
   metrics:
     enabled:
@@ -38,7 +32,7 @@ l2announcements: # needed for cilium lb ipam
   leaseDuration: 8s
   leaseRenewDeadline: 4s
   leaseRetryPeriod: 2s
-l7Proxy: false # needed for istio
+l7Proxy: false # cilium does not need to do any layer 7 things
 securityContext: # needed for talos
   capabilities:
     ciliumAgent:

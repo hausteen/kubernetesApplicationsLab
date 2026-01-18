@@ -1,0 +1,6 @@
+crds:
+  gatewayAPI: # i install them manually
+    enabled: false
+    channel: standard
+  envoyGateway:
+    enabled: true

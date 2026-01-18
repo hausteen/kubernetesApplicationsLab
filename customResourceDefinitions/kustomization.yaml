@@ -3,10 +3,15 @@ kind: Kustomization
 resources:
   - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml # gateway api standard channel
   # - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/experimental-install.yaml # gateway api experimental channel
+helmCharts:
+  - name: gateway-crds-helm
+    repo: docker.io/envoyproxy
+    version: 1.6.2
+    includeCRDs: true
+    valuesFile: valuesEnvoyGateway.yaml
 
 # Other CRDs
-# argocd       self-manages its own crds
-# cert-manager self-manages its own crds
-# cilium       self-manages its own crds
-# istio        self-manages its own crds
-# longhorn     self-manages its own crds
+# argocd          self-manages its own crds
+# cert-manager    self-manages its own crds
+# cilium          self-manages its own crds
+# longhorn        self-manages its own crds

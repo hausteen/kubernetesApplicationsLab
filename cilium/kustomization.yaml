@@ -11,4 +11,3 @@ helmCharts:
 resources:
   - resources/loadBalancerIpAddressManagement.yaml
   - resources/layer2Announcements.yaml
-  - resources/allowIstioHealthProbes.yaml
