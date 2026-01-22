@@ -4,11 +4,10 @@ kind: Gateway
 metadata:
   name: hunt-internal-production-lab
   namespace: gateway-api
+  annotations:
+    lbipam.cilium.io/ips: 192.168.20.82
 spec:
   gatewayClassName: gateway-class
-  addresses:
-    - type: IPAddress
-      value: 192.168.20.82
   listeners:
     - name: http
       protocol: HTTP
