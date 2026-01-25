@@ -7,6 +7,6 @@ resources:
   - resources/gatewayHuntInternalProductionHome.yaml
   - resources/gatewayHuntInternalProductionLab.yaml
   - resources/routeArgocd.yaml
-    - resources/routeCoredns.yaml
+  - resources/routeCoredns.yaml
   - resources/routeLonghorn.yaml
   - resources/routeHttpToHttpsRedirect.yaml

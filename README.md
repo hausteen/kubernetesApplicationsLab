@@ -30,7 +30,7 @@ I am using the app of apps pattern in Argo CD to deploy and manage Kubernetes ap
 | longhorn | namespaceCreation |
 | gatewayApi | namespaceCreation, certManager, envoyGateway |
 
-## pod security standard
+## pod security admission standard
 
-By default, this cluster is using the level = restricted; for all 3 modes = enforce, audit, and warn.
+By default, this cluster is using the level = `restricted` for all 3 modes = `enforce`, `audit`, and `warn`.
 Every namespace receives this level unless explicity overridden.
