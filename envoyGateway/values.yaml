@@ -8,4 +8,4 @@ config:
   envoyGateway:
     logging:
       level:
-        default: "debug"
+        default: debug
