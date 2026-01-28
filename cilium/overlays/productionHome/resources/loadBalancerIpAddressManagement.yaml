@@ -1,0 +1,10 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: network-outside-the-cluster
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  blocks:
+    - start: "192.168.20.80"
+      stop: "192.168.20.99"

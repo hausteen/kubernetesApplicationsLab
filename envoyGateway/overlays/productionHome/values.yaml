@@ -1,0 +1,19 @@
+crds:
+  envoyGateway:
+    enabled: true
+  gatewayAPI:
+    channel: experimental
+    enabled: true
+config:
+  envoyGateway:
+    gateway:
+      controllerName: gateway.envoyproxy.io/productionhome-gatewayclass-controller
+    logging:
+      level:
+        default: debug
+    provider:
+      kubernetes:
+        watch:
+          namespaces:
+            - productionhome-gatewayapi
+          type: Namespaces

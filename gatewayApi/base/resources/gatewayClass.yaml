@@ -1,7 +1,8 @@
-# https://gateway-api.sigs.k8s.io/api-types/gatewayclass/
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
-  name: gateway-class
+  name: placeholder-gatewayclass
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
-  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  controllerName: gateway.envoyproxy.io/placeholder-gatewayclass-controller

@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: gateway-helm
+    repo: oci://docker.io/envoyproxy
+    version: 1.6.3
+    namespace: productionhome-gatewayapi
+    includeCRDs: true
+    valuesFile: values.yaml
+namespace: productionhome-gatewayapi
+resources:
+  - resources/envoyProxy.yaml
+
+# there is no kustomize base intentionally. it can't be easily
+# patched so i'll keep the different environments
+# here in this overlays folder and manage separate
+# helm template inflations. the reason it can't be easily
+# patched is because the inflated resources have the namespace
+# all over the place in partial strings. it would be ugly and
+# error prone to manage long-term.

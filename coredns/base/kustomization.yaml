@@ -1,10 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - resources/namespace.yaml
+  - resources/configmapCorefile.yaml
   - resources/service.yaml
   - resources/deployment.yaml
+  - resources/routeCoredns.yaml
 
-# Note:
+# note:
 # the reason why i am not using the helm version is because
 # the helm version bundles a default zone that i can not
 # disable. its also geared for running as the main kubernetes

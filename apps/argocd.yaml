@@ -4,14 +4,14 @@ metadata:
   name: argocd
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "70"
+    argocd.argoproj.io/sync-wave: "60"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/hausteen/kubernetesApplications.git
-    path: argocd/overlays/production
+    path: argocd/overlays/productionHome
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc

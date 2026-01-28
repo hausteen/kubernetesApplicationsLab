@@ -1,0 +1,16 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: huntinternal
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        annotations:
+          lbipam.cilium.io/ips: 192.168.20.80
+  logging:
+    level:
+      default: debug

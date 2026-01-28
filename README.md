@@ -6,29 +6,25 @@ I am using the app of apps pattern in Argo CD to deploy and manage Kubernetes ap
 
 | name | sync wave |
 | ---- | --------- |
-| namespaceCreation | 0 |
-| customResourceDefinitions | 10 |
-| certManager | 20 |
-| envoyGateway | 30 |
-| gatewayApi | 40 |
-| cilium | 50 |
-| longhorn | 60 |
-| argocd | 70 |
-| coredns | 80 |
+| certManager | 10 |
+| envoyGateway | 20 |
+| gatewayApi | 30 |
+| cilium | 40 |
+| longhorn | 50 |
+| argocd | 60 |
+| coredns | 70 |
 
 ## dependency list
 
 | name | dependency list |
 | ---- | ---------------- |
-| namespaceCreation | none |
-| customResourceDefinitions | namespaceCreation |
-| certManager | namespaceCreation |
-| envoyGateway | namespaceCreation |
-| gatewayApi | namespaceCreation, certManager, envoyGateway |
-| argocd | gatewayApi |
+| certManager | none |
+| envoyGateway | none |
+| gatewayApi | certManager, envoyGateway |
 | cilium | gatewayApi |
-| coredns | namespaceCreation, gatewayApi |
-| longhorn | namespaceCreation, gatewayApi |
+| longhorn | gatewayApi |
+| argocd | gatewayApi |
+| coredns | gatewayApi |
 
 I am putting the gateway api routes with each application. That means then that envoy gateway, gateway api, and
 certificates have to be in place before the other applications get installed.
@@ -37,3 +33,7 @@ certificates have to be in place before the other applications get installed.
 
 By default, this cluster is using the level = `restricted` for all 3 modes = `enforce`, `audit`, and `warn`.
 Every namespace receives this level unless explicity overridden.
+
+## kustomize patches
+
+Uses JSON6902 style most of the time. Argocd uses strategic merge patches.

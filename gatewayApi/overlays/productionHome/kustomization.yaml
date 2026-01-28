@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: productionhome-gatewayapi
+resources:
+  - ../../base/
+patches:
+  - path: patches/namespace.yaml
+    target:
+      kind: Namespace
+      name: placeholder-gatewayapi
+    options:
+      allowNameChange: true
+  - path: patches/gatewayClass.yaml
+    target:
+      kind: GatewayClass
+      name: placeholder-gatewayclass
+    options:
+      allowNameChange: true
+  - path: patches/gateway.yaml
+    target:
+      kind: Gateway
+      name: huntinternal
+  - path: patches/gatewayTlsTerminationCertificate.yaml
+    target:
+      kind: Certificate
+      name: gateway-huntinternal-tls-termination
