@@ -4,8 +4,8 @@ namespace: argocd
 resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 patches: # using strategic merge patches here
-  - patches/argocdCm.yaml
-  - patches/argocdCmdParamsCm.yaml
+  - path: patches/argocdCm.yaml
+  - path: patches/argocdCmdParamsCm.yaml
 
 # there is no kustomize base intentionally.
 # argocd should only be installed once.

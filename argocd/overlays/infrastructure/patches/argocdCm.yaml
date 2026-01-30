@@ -8,7 +8,8 @@ metadata:
 data:
   kustomize.buildOptions: "--enable-helm --load-restrictor LoadRestrictionsNone" # this must stay as a string
   users.anonymous.enabled: "false" # this must stay as a string
-  resource.customizations.health.argoproj.io_Application: | # needed for sync waves to work. https://argo-cd.readthedocs.io/en/stable/operator-manual/health/#argocd-app
+  # next line needed for sync waves to work. https://argo-cd.readthedocs.io/en/stable/operator-manual/health/#argocd-app
+  resource.customizations.health.argoproj.io_Application: |
     hs = {}
     hs.status = "Progressing"
     hs.message = ""
