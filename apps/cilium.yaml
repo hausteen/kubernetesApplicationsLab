@@ -4,7 +4,7 @@ metadata:
   name: cilium
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -25,3 +25,5 @@ spec:
       backoff:
         duration: 5s
         factor: 2
+    syncOptions:
+      - ServerSideApply=true

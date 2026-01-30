@@ -1,7 +1,4 @@
 - op: replace
-  path: /spec/gatewayClassName
-  value: productionhome-gatewayclass
-- op: replace
   path: /spec/listeners/1/tls/certificateRefs/0/namespace
   value: productionhome-gatewayapi
 - op: add

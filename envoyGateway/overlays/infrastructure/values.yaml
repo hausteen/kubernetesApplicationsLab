@@ -1,0 +1,9 @@
+config:
+  envoyGateway:
+    logging:
+      level:
+        default: debug
+    provider:
+      kubernetes:
+        deploy:
+          type: GatewayNamespace

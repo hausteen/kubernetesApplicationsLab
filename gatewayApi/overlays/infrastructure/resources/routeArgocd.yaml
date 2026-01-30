@@ -1,21 +1,22 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: cilium-hubble
+  name: argocd
+  namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   parentRefs:
     - name: huntinternal
-      namespace: productionhome-gatewayapi
+      namespace: infrastructure-gatewayapi
       sectionName: https
   hostnames:
-    - cilium.production.home.hunt.internal
+    - argocd.infrastructure.hunt.internal
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: hubble-ui
-          port: 80
+        - name: argocd-server
+          port: 443

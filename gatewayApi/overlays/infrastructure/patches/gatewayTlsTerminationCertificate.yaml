@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/dnsNames/0
+  value: "*.infrastructure.hunt.internal"
+- op: add
+  path: /metadata/namespace
+  value: infrastructure-gatewayapi

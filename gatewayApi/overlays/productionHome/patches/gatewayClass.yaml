@@ -1,6 +1,0 @@
-- op: replace
-  path: /metadata/name
-  value: productionhome-gatewayclass
-- op: replace
-  path: /spec/controllerName
-  value: gateway.envoyproxy.io/productionhome-gatewayclass-controller

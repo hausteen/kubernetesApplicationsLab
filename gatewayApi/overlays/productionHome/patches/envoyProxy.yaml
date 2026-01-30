@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/provider/kubernetes/envoyService/annotations/lbipam.cilium.io~1ips
+  value: 192.168.20.80

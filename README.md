@@ -7,13 +7,16 @@ I am using the app of apps pattern in Argo CD to deploy and manage Kubernetes ap
 | name | sync wave |
 | ---- | --------- |
 | namespaceCreation | 0 |
-| customResourceDefinitions | 5 |
-| certManager | 10 |
-| gatewayApi | 20 |
-| cilium | 30 |
-| longhorn | 40 |
-| argocd | 50 |
-| coredns | 60 |
+| customResourceDefinitions | 10 |
+| certManager | 20 |
+| argocd | 30 |
+| cilium | 40 |
+| longhorn | 50 |
+| certificateCreation | 60 |
+| envoyGateway | 70 |
+| coredns | 80 |
+| gatewayApiInfrastructure | 90 |
+| gatewayApiProductionHome | 100 |
 
 ## dependency list
 
@@ -22,14 +25,16 @@ I am using the app of apps pattern in Argo CD to deploy and manage Kubernetes ap
 | namespaceCreation | none |
 | customResourceDefinitions | none |
 | certManager | namespaceCreation |
-| gatewayApi | namespaceCreation, customResourceDefinitions, certManager |
-| cilium | gatewayApi |
-| longhorn | namespaceCreation, gatewayApi |
-| argocd | gatewayApi |
-| coredns | namespaceCreation, gatewayApi |
+| argocd | none |
+| cilium | none |
+| longhorn | namespaceCreation |
+| certificateCreation | certManager |
+| envoyGateway | customResourceDefinitions |
+| coredns | namespaceCreation |
+| gatewayApiInfrastructure | namespaceCreation, certManager |
+| gatewayApiProductionHome | namespaceCreation, certManager, gatewayApiInfrastructure |
 
-I am putting the gateway api routes with each application. That means then that gateway api and
-certificates have to be in place before the other applications get installed.
+We need to give certManager and envoyGateway as much time for them both to set up their certificates before we start calling them.
 
 ## pod security admission standard
 

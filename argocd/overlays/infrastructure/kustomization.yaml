@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: argocd
 resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  - resources/routeArgocd.yaml
 patches: # using strategic merge patches here
   - patches/argocdCm.yaml
   - patches/argocdCmdParamsCm.yaml

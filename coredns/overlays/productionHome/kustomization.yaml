@@ -4,15 +4,6 @@ namespace: productionhome-coredns
 resources:
   - ../../base/
   - resources/configmapZonefile.yaml
-patches:
-  - path: patches/routeCoredns.yaml
-    target:
-      kind: UDPRoute
-      name: coredns
-  - path: patches/routeCoredns.yaml
-    target:
-      kind: TCPRoute
-      name: coredns
 
 # note:
 # the reason why i am not using the helm version is because

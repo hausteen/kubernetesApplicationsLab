@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/listeners/1/tls/certificateRefs/0/namespace
+  value: infrastructure-gatewayapi
+- op: add
+  path: /metadata/namespace
+  value: infrastructure-gatewayapi

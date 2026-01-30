@@ -3,6 +3,6 @@ kind: Issuer
 metadata:
   name: selfsigned
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   selfSigned: {}

@@ -3,14 +3,14 @@ kind: EnvoyProxy
 metadata:
   name: huntinternal
   annotations:
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   provider:
     type: Kubernetes
     kubernetes:
       envoyService:
         annotations:
-          lbipam.cilium.io/ips: 192.168.20.80
+          lbipam.cilium.io/ips: placeholder
   logging:
     level:
       default: debug

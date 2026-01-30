@@ -8,8 +8,7 @@ helmCharts:
     namespace: longhorn-system
     includeCRDs: true
     valuesFile: values.yaml
-resources:
-  - resources/routeLonghorn.yaml
+
 
 # there is no kustomize base intentionally.
 # longhorn should only be installed once.

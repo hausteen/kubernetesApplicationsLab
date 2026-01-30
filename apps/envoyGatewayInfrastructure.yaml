@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: infrastructure-envoygateway
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "70"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/hausteen/kubernetesApplications.git
-    path: argocd/overlays/infrastructure
+    path: envoyGateway/overlays/infrastructure
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
@@ -25,5 +25,3 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-    syncOptions:
-      - ServerSideApply=true

@@ -4,3 +4,9 @@ kind: Namespace
 metadata:
   name: productionhome-gatewayapi
 ...
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infrastructure-gatewayapi
+...

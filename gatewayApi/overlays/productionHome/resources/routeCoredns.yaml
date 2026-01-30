@@ -4,11 +4,11 @@ kind: UDPRoute
 metadata:
   name: coredns
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   parentRefs:
     - name: huntinternal
-      namespace: placeholder-gatewayapi
+      namespace: productionhome-gatewayapi
       sectionName: dns-udp
   rules:
     - backendRefs:
@@ -22,11 +22,11 @@ kind: TCPRoute
 metadata:
   name: coredns
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   parentRefs:
     - name: huntinternal
-      namespace: placeholder-gatewayapi
+      namespace: productionhome-gatewayapi
       sectionName: dns-tcp
   rules:
     - backendRefs:
