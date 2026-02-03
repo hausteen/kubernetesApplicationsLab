@@ -11,9 +11,10 @@ metadata:
     istio.io/waypoint-for: service
 spec:
   gatewayClassName: istio-waypoint
-  parametersRef:
-    kind: ConfigMap
-    name: gateway-options
+  infrastructure:
+    parametersRef:
+      kind: ConfigMap
+      name: gateway-options
   listeners:
     - name: mesh
       port: 15008
@@ -48,9 +49,10 @@ metadata:
     istio.io/waypoint-for: service
 spec:
   gatewayClassName: istio-waypoint
-  parametersRef:
-    kind: ConfigMap
-    name: gateway-options
+  infrastructure:
+    parametersRef:
+      kind: ConfigMap
+      name: gateway-options
   listeners:
     - name: mesh
       port: 15008
@@ -69,9 +71,10 @@ metadata:
     istio.io/waypoint-for: service
 spec:
   gatewayClassName: istio-waypoint
-  parametersRef:
-    kind: ConfigMap
-    name: gateway-options
+  infrastructure:
+    parametersRef:
+      kind: ConfigMap
+      name: gateway-options
   listeners:
     - name: mesh
       port: 15008
