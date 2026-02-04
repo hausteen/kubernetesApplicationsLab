@@ -12,7 +12,7 @@ spec:
   infrastructure:
     parametersRef:
       kind: ConfigMap
-      name: gateway-options
+      name: infrastructure-gateway-options
       group: ""
   listeners:
     - name: http

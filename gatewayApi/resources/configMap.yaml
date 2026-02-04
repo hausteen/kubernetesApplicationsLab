@@ -1,8 +1,7 @@
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gateway-options
+  name: infrastructure-gateway-options
   namespace: infrastructure
   annotations:
     argocd.argoproj.io/sync-wave: "0"
@@ -16,4 +15,3 @@ data:
             securityContext:
               seccompProfile:
                 type: "RuntimeDefault"
-...

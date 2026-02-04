@@ -9,6 +9,7 @@ spec:
   parentRefs:
     - name: infrastructure
       sectionName: http
+      namespace: infrastructure
       group: gateway.networking.k8s.io
       kind: Gateway
   rules:
