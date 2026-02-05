@@ -3,14 +3,15 @@ kind: ConfigMap
 metadata:
   name: coredns-corefile
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "5"
 data:
   Corefile: |
     hunt.internal {
       cache 30
       errors
+      file /zones/db.hunt.internal
       auto {
-        directory /zones
+        directory /zones db\.(.*) {1}
         reload 30s
       }
       health # only set 1 time for all the zones. its a global setting.

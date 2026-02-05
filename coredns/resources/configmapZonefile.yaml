@@ -5,14 +5,15 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 data:
-  dbHuntInternal: | # <-- this is the name of the file that gets written to disk. file content is below.
-    hunt.internal. 3600 IN SOA dns.hunt.internal. localhost.hunt.internal. (
+  db.hunt.internal: | # <-- this is the name of the file that gets written to disk. file content is below.
+    $ORIGIN hunt.internal.
+    @ 3600 IN SOA dns.hunt.internal. localhost.hunt.internal. (
         2       ; Serial number - change this number each time a change is made or else coredns won't pick up the change
         60      ; Refresh       - every minute
         300     ; Retry         - every 5 minutes
         86400   ; Expire        - 24 hours
         30 )    ; Minimum TTL   - 1 hour
-    dns.hunt.internal. 30 IN A 192.168.20.90
-    argocd.hunt.internal. 30 IN A 192.168.20.80
-    longhorn.hunt.internal. 30 IN A 192.168.20.80
-    testing.hunt.internal. 30 IN A 192.168.20.81
+    dns       30 IN A 192.168.20.90
+    argocd    30 IN A 192.168.20.80
+    longhorn  30 IN A 192.168.20.80
+    testing   30 IN A 192.168.20.81
