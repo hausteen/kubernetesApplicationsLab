@@ -8,7 +8,7 @@ data:
   db.hunt.internal: | # <-- this is the name of the file that gets written to disk. file content is below.
     $ORIGIN hunt.internal.
     @ 3600 IN SOA dns.hunt.internal. localhost.hunt.internal. (
-        2       ; Serial number - change this number each time a change is made or else coredns won't pick up the change
+        3       ; Serial number - change this number each time a change is made or else coredns won't pick up the change
         60      ; Refresh       - every minute
         300     ; Retry         - every 5 minutes
         86400   ; Expire        - 24 hours
@@ -16,4 +16,4 @@ data:
     dns       30 IN A 192.168.20.90
     argocd    30 IN A 192.168.20.80
     longhorn  30 IN A 192.168.20.80
-    testing   30 IN A 192.168.20.81
+    goofy   30 IN A 192.168.20.82
