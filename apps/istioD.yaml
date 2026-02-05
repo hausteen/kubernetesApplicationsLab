@@ -27,3 +27,9 @@ spec:
         factor: 2
     syncOptions:
       - ServerSideApply=true
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: istio-validator-istio-system
+      jqPathExpressions:
+        - .webhooks[] | select(.name == "rev.validation.istio.io") | .failurePolicy
