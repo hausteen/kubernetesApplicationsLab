@@ -7,5 +7,6 @@ helmCharts:
     repo: oci://quay.io/jetstack/charts/
     version: 1.19.2
     namespace: cert-manager
+    releaseName: cert-manager
     includeCRDs: true
     valuesFile: values.yaml
