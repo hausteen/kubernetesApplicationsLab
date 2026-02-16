@@ -1,4 +1,4 @@
-# kubernetesApplications
+# kubernetesApplicationsLab
 
 I am using the app of apps pattern in Argo CD to deploy and manage Kubernetes applications.
 
