@@ -13,7 +13,8 @@ spec:
         annotations:
           lbipam.cilium.io/ips: "192.168.20.80"
   logging:
-    level: debug
+    level:
+      default: debug
   telemetry:
     accessLog:
       disable: false
