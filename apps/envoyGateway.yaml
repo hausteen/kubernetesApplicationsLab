@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-cni
+  name: envoy-gateway
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/hausteen/kubernetesApplications.git
-    path: istioCni/
+    repoURL: https://github.com/hausteen/kubernetesApplicationsLab.git
+    path: envoyGateway/
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc

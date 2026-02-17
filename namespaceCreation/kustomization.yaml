@@ -5,8 +5,5 @@ resources:
   - resources/argocd.yaml
   - resources/certManager.yaml
   - resources/coredns.yaml
-  - resources/default.yaml
-  - resources/istio.yaml
   - resources/longhorn.yaml
-  - resources/metalLb.yaml
   - resources/infrastructure.yaml

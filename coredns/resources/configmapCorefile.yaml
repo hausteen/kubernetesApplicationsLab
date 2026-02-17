@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: coredns-corefile
   annotations:
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "10"
 data:
   Corefile: |
     hunt.internal {
@@ -24,7 +24,7 @@ data:
     . {
       cache 30
       errors
-      forward . 1.1.1.1 8.8.8.8
+      forward . 1.1.1.1 9.9.9.9
       loadbalance
       log
       loop

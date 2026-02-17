@@ -1,4 +1,3 @@
----
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -6,14 +5,14 @@ metadata:
   namespace: infrastructure
   annotations:
     argocd.argoproj.io/sync-wave: "10"
-    metallb.io/loadBalancerIPs: 192.168.20.80
+    lbipam.cilium.io/ips: "192.168.20.80"
 spec:
-  gatewayClassName: istio
+  gatewayClassName: infrastructure
   infrastructure:
     parametersRef:
-      kind: ConfigMap
-      name: infrastructure-gateway-options
-      group: ""
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: custom-proxy-config
   listeners:
     - name: http
       protocol: HTTP
@@ -34,26 +33,3 @@ spec:
             namespace: infrastructure
             group: ""
             kind: Secret
-...
-# ---
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: Gateway
-# metadata:
-#   name: waypoint # layer 7 filtering at the namespace level
-#   namespace: <>
-#   annotations:
-#     argocd.argoproj.io/sync-wave: "10"
-#   labels:
-#     istio.io/waypoint-for: service
-# spec:
-#   gatewayClassName: istio-waypoint
-#   infrastructure:
-#     parametersRef:
-#       kind: ConfigMap
-#       name: gateway-options # must be in same namespace as this config map
-#       group: ""
-#   listeners:
-#     - name: mesh
-#       port: 15008
-#       protocol: HBONE
-# ...

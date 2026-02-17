@@ -2,10 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 helmCharts:
-  - name: base # istio base
-    repo: https://istio-release.storage.googleapis.com/charts
-    version: 1.28.3
-    namespace: istio-system
+  - name: gateway-crds-helm
+    repo: oci://docker.io/envoyproxy/
+    version: 1.7.0
     includeCRDs: true
+    valuesFile: envoyGatewayValues.yaml
+    # namespace: infrastructure
 resources:
-  - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml # gateway api standard channel
+  - https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml # gateway api standard channel

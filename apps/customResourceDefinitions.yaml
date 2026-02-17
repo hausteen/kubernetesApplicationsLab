@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/hausteen/kubernetesApplications.git
+    repoURL: https://github.com/hausteen/kubernetesApplicationsLab.git
     path: customResourceDefinitions/
     targetRevision: main
   destination:
@@ -27,9 +27,9 @@ spec:
         factor: 2
     syncOptions:
       - ServerSideApply=true
-  ignoreDifferences:
-    - group: admissionregistration.k8s.io
-      kind: ValidatingWebhookConfiguration
-      name: istiod-default-validator
-      jqPathExpressions:
-        - .webhooks[] | select(.name == "validation.istio.io") | .failurePolicy
+  # ignoreDifferences:
+  #   - group: admissionregistration.k8s.io
+  #     kind: ValidatingWebhookConfiguration
+  #     name: istiod-default-validator
+  #     jqPathExpressions:
+  #       - .webhooks[] | select(.name == "validation.istio.io") | .failurePolicy

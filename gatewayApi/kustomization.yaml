@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/gatewayTlsTerminationCertificate.yaml
-  - resources/configMap.yaml
+  - resources/gatewayClass.yaml
   - resources/gateway.yaml
   - resources/routeArgocd.yaml
   - resources/routeLonghorn.yaml

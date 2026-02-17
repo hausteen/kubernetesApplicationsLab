@@ -1,5 +1,0 @@
-controller:
-  logLevel: all
-  tlsMinVersion: VersionTLS13
-speaker:
-  logLevel: all

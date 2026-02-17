@@ -1,0 +1,61 @@
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+bpf:
+  masquerade: true
+cluster:
+  name: lab
+  id: 1
+encryption:
+  enabled: true
+  type: wireguard
+  nodeEncryption: true
+gatewayAPI:
+  enabled: false
+hubble:
+  metrics:
+    enabled:
+      - dns:query;ignoreAAAA
+      - drop
+      - flow
+      - http
+      - icmp
+      - tcp
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+ipam:
+  mode: "kubernetes"
+k8sClientRateLimit:
+  burst: 100
+  qps: 50 # services * (1 / leaseRenewDeadline)
+k8sServiceHost: localhost
+k8sServicePort: 7445
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+l2announcements:
+  enabled: true
+  leaseDuration: 8s
+  leaseRenewDeadline: 4s
+  leaseRetryPeriod: 2s
+l7Proxy: false
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - IPC_LOCK
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - SETGID
+      - SETUID
+      - SYS_ADMIN
+      - SYS_RESOURCE
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE

@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-ztunnel
+  name: cilium
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "40"
+    argocd.argoproj.io/sync-wave: "30"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/hausteen/kubernetesApplications.git
-    path: istioZtunnel/
+    repoURL: https://github.com/hausteen/kubernetesApplicationsLab.git
+    path: cilium/
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
@@ -27,6 +27,3 @@ spec:
         factor: 2
     syncOptions:
       - ServerSideApply=true
-
-# the out of sync bug in argocd (divisor: '0') is patched in the master branch of istio.
-# just waiting for that to be released.

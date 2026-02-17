@@ -1,7 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: development-network-pool
-spec:
-  addresses:
-  - 192.168.20.80-192.168.20.99

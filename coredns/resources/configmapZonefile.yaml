@@ -6,15 +6,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 data:
   db.hunt.internal: | # <-- this is the name of the file that gets written to disk. file content is below.
-    $ORIGIN hunt.internal.
-    @ 3600 IN SOA dns.hunt.internal. internal-email.hunt.internal. (
-        6       ; Serial number - change this number each time a change is made or else coredns won't pick up the change
-        60      ; Refresh       - every minute
-        300     ; Retry         - every 5 minutes
-        86400   ; Expire        - 24 hours
-        30 )    ; Minimum TTL   - 1 hour
-    dns       30 IN A 192.168.20.90
-    argocd    30 IN A 192.168.20.80
-    longhorn  30 IN A 192.168.20.80
+    $TTL 30 ; default TTL
+    $ORIGIN hunt.internal. ; base domain name
+    ; start of authority rr defining the key characteristics of the zone (domain)
+    @ IN SOA ns1.hunt.internal. internal-email.hunt.internal. (
+      6     ; serial number - change this number each time a change is made or else coredns won't pick up the change
+      60    ; refresh       - every minute
+      300   ; update retry  - every 5 minutes
+      86400 ; expiry        - 24 hours
+      30    ; minimum ttl   - 1 hour
+      )
+             IN NS ns1.hunt.internal. ; name server rr for the domain
+    ns1      IN A 192.168.20.90
+    argocd   IN A 192.168.20.80
+    longhorn IN A 192.168.20.80
 
-# dont forget... Serial number - change this number each time a change is made or else coredns won't pick up the change
+# dont forget... serial number - change this number each time a change is made or else coredns won't pick up the change
