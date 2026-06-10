@@ -1,0 +1,33 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: keycloak-lab
+  namespace: cnpg-system
+spec:
+  instances: 3
+  certificates:
+    serverCASecret: keycloak-lab
+    serverTLSSecret: keycloak-lab
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: keycloak-lab-app
+  storage:
+    pvcTemplate:
+      accessModes:
+      - ReadWriteOncePod
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: no-replication
+      volumeMode: Filesystem
+  logLevel: info
+  managed:
+    roles:
+    - name: admin
+      login: true
+      superuser: true
+      passwordSecret:
+        name: keycloak-lab-admin

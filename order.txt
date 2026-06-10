@@ -1,0 +1,24 @@
+install/deployment order:
+1.  applications/cilium
+2.  configurations/cilium/phase1
+3.  applications/gateway-api-crds
+4.  applications/cert-manager
+5.  configurations/cert-manager
+6.  applications/trust-manager
+7.  human: manually create the copy of the hunt internal certificate authority for trust manager
+8.  configurations/trust-manager
+9.  applications/longhorn
+10. applications/nginx-gateway-fabric
+11. applications/openbao
+12. applications/external-secrets-operator
+13. applications/cloudnativepg
+14. applications/coredns
+15. applications/istio
+16. configurations/gateway-api
+17. configurations/external-secrets-operator
+18. configurations/cloudnativepg
+19. configurations/istio
+20. configurations/coredns
+21. configurations/cilium/phase2
+22. configurations/longhorn
+23. configurations/openbao

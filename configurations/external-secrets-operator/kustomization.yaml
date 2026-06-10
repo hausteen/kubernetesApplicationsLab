@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- openbao/cluster-secret-store.yaml
+- openbao/generator.yaml
+- openbao/push-secret.yaml
+- openbao/external-secret.yaml
