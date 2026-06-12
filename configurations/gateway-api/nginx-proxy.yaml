@@ -1,7 +1,7 @@
 apiVersion: gateway.nginx.org/v1alpha2
 kind: NginxProxy
 metadata:
-  name: ingress
+  name: front-door
   namespace: gateway-api
 spec:
   ipFamily: ipv4

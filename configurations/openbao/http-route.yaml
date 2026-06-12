@@ -5,7 +5,7 @@ metadata:
   namespace: openbao
 spec:
   parentRefs:
-  - name: ingress
+  - name: front-door
     sectionName: https
     namespace: gateway-api
     group: gateway.networking.k8s.io

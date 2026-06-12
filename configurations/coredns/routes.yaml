@@ -6,7 +6,7 @@ metadata:
   namespace: coredns
 spec:
   parentRefs:
-  - name: ingress
+  - name: front-door
     sectionName: dns-udp
     namespace: gateway-api
     group: gateway.networking.k8s.io
@@ -26,7 +26,7 @@ metadata:
   namespace: coredns
 spec:
   parentRefs:
-  - name: ingress
+  - name: front-door
     sectionName: dns-tcp
     namespace: gateway-api
     group: gateway.networking.k8s.io

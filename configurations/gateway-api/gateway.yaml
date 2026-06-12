@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: ingress
+  name: front-door
   namespace: gateway-api
 spec:
   gatewayClassName: nginx-gateway-fabric
@@ -9,7 +9,7 @@ spec:
     parametersRef:
         group: gateway.nginx.org
         kind: NginxProxy
-        name: ingress
+        name: front-door
   listeners:
   - name: http
     protocol: HTTP
@@ -26,7 +26,7 @@ spec:
     tls:
       mode: Terminate
       certificateRefs:
-      - name: ingress
+      - name: front-door
         namespace: gateway-api
         kind: Secret
       options: # this section is specifically for nginx gateway fabric

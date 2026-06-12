@@ -5,7 +5,7 @@ metadata:
   namespace: gateway-api
 spec:
   parentRefs:
-  - name: ingress
+  - name: front-door
     sectionName: http
     namespace: gateway-api
     group: gateway.networking.k8s.io

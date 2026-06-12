@@ -32,5 +32,5 @@ spec:
     port: 15008
     protocol: HBONE
 ...
-# I'm not sure on how the ingress is supposed to work yet.
+# I'm not sure on how the front-door gateway with waypoints is supposed to work yet.
 # change this waypoint to be for nginx-gateway-fabric. we do not need a waypoint for cert-manager
