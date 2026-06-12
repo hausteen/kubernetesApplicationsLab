@@ -22,9 +22,9 @@ The repo is currently using Flux CD. I really like the mental model that Flux us
 
 ### How the codebase all fits together
 
-During cluster bootstrap, I install Flux Operator. I give it a Flux Instance file and I give it my Github app credential. This Flux Instance file creates a Flux gitrepository and Flux kustomization object (both called flux-system), which point to my github repo and clusters/\<name\> folder respectively. The flux-system kustomization object sees the clusters/\<name\>/kustomization.yaml file which points at the clusters/\<name\>/kustomize-controller.yaml file. That clusters/\<name\>/kustomization.yaml file points at the applications/ and configurations/ folders in the correct order to deploy everything.
+During cluster bootstrap, I install Flux Operator. I give it a Flux Instance file and I give it my Github app credential. This Flux Instance file creates a Flux gitrepository and Flux kustomization object (both called flux-system), which point to my github repo and clusters/\<name\> folder respectively. The flux-system kustomization object sees the clusters/\<name\>/kustomization.yaml file which points at the clusters/\<name\>/kustomize-controller.yaml file. That clusters/\<name\>/kustomize-controller.yaml file points at the applications/ and configurations/ folders in the correct order to deploy everything.
 
-Read the clusters/\<name\>/kustomization.yaml file in order to see what is in each cluster. It should match the below tables for each cluster.
+Read the clusters/\<name\>/kustomize-controller.yaml file in order to see what is in each cluster. It should match the below tables for each cluster.
 
 
 ### Patches
