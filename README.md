@@ -22,35 +22,44 @@ The repo is currently using Flux CD. I really like the mental model that Flux us
 
 ### How the codebase all fits together
 
-todo
+During cluster bootstrap, I install Flux Operator. I give it a Flux Instance file and I give it my Github app credential. This Flux Instance file creates a Flux gitrepository and Flux kustomization object (both called flux-system), which point to my github repo and clusters/\<name\> folder respectively. The flux-system kustomization object sees the clusters/\<name>\/kustomization.yaml file which points at the clusters/\<name>\/kustomize-controller.yaml file. That clusters/\<name>\/kustomization.yaml file points at the applications/ and configurations/ folders in the correct order to deploy everything.
 
-## Installation order
+Read the clusters/\<name>\/kustomization.yaml file in order to see what is in each cluster. It should match the below tables for each cluster.
+
+
+### Patches
+
+There is a clusters/\<name>\/patches/ folder that will contain the kustomization patches for files in the applications and configurations folders. This is how I'll be able to modify things at the single cluster level without messing with the other clusters.
+
+## Installation
 
 ### For "clusters/lab":
 
-1.  applications/cilium
-2.  configurations/cilium/phase1
-3.  applications/gateway-api-crds
-4.  applications/cert-manager
-5.  configurations/cert-manager
-6.  applications/trust-manager
-7.  human: manually create the copy of the hunt internal certificate authority for trust manager. the command is in configurations/trust-manager/bundle step 3.
-8.  configurations/trust-manager
-9.  applications/longhorn
-10. applications/nginx-gateway-fabric
-11. applications/openbao
-12. applications/external-secrets-operator
-13. applications/cloudnativepg
-14. applications/coredns
-15. applications/istio
-16. configurations/gateway-api
-17. configurations/external-secrets-operator
-18. configurations/cloudnativepg
-19. configurations/istio
-20. configurations/coredns
-21. configurations/cilium/phase2
-22. configurations/longhorn
-23. configurations/openbao
+| Install Order | Name                                     | Depends On |
+| ------------- | ---------------------------------------- | ---------- |
+| 0             | applications/gateway-api-crds            | nothing |
+| 0             | applications/cilium                      | nothing |
+| 1             | applications/cert-manager                | applications/cilium |
+| 1             | applications/longhorn                    | applications/cilium |
+| 1             | applications/nginx-gateway-fabric        | applications/cilium, applications/gateway-api-crds |
+| 1             | applications/coredns                     | applications/cilium |
+| 1             | applications/istio                       | applications/cilium |
+| 1             | applications/external-secrets-operator   | applications/cilium |
+| 1             | applications/cloudnativepg               | applications/cilium |
+| 1             | configurations/cilium/phase1             | applications/cilium |
+| 2             | applications/trust-manager               | applications/cert-manager |
+| 2             | configurations/cert-manager              | applications/cert-manager |
+| 2             | configurations/istio                     | applications/istio |
+| 3             | human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in configurations/trust-manager/bundle step 3. | configurations/cert-manager |
+| 3             | applications/openbao                     | configurations/cert-manager, applications/longhorn |
+| 3             | configurations/gateway-api               | configurations/cert-manager, applications/nginx-gateway-fabric |
+| 4             | configurations/trust-manager             | applications/trust-manager, human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in configurations/trust-manager/bundle step 3. |
+| 4             | configurations/coredns                   | applications/coredns, configurations/gateway-api |
+| 4             | configurations/cilium/phase2             | configurations/gateway-api |
+| 4             | configurations/longhorn                  | applications/longhorn, configurations/gateway-api |
+| 4             | configurations/openbao                   | applications/openbao, configurations/gateway-api |
+| 5             | configurations/external-secrets-operator | applications/external-secrets-operator, applications/openbao, configurations/trust-manager |
+| 6             | configurations/cloudnativepg             | applications/cloudnativepg, applications/longhorn, configurations/external-secrets-operator |
 
 ### For "clusters/home-staging":
 

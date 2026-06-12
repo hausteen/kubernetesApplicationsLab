@@ -2,6 +2,23 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: applications-gateway-api-crds
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/gateway-api-crds
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: applications-cilium
   namespace: flux-system
 spec:
@@ -14,6 +31,148 @@ spec:
   prune: true
   wait: true
   path: applications/cilium
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-cert-manager
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/cert-manager
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-longhorn
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/longhorn
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-nginx-gateway-fabric
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  - name: applications-gateway-api-crds
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/nginx-gateway-fabric
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-coredns
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/coredns
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-istio
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/istio
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-external-secrets-operator
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/external-secrets-operator
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-cloudnativepg
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/cloudnativepg
 ...
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -39,28 +198,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: applications-gateway-api-crds
-  namespace: flux-system
-spec:
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/gateway-api-crds
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-cert-manager
+  name: applications-trust-manager
   namespace: flux-system
 spec:
   dependsOn:
-  - name: configurations-cilium-phase1
+  - name: applications-cert-manager
     namespace: flux-system
   sourceRef:
     kind: GitRepository
@@ -70,7 +212,7 @@ spec:
   timeout: 5m
   prune: true
   wait: true
-  path: applications/cert-manager
+  path: applications/trust-manager
 ...
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -96,11 +238,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: applications-trust-manager
+  name: configurations-istio
   namespace: flux-system
 spec:
   dependsOn:
-  - name: configurations-cert-manager
+  - name: applications-istio
     namespace: flux-system
   sourceRef:
     kind: GitRepository
@@ -110,7 +252,51 @@ spec:
   timeout: 5m
   prune: true
   wait: true
-  path: applications/trust-manager
+  path: configurations/istio
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-openbao
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: configurations-cert-manager
+    namespace: flux-system
+  - name: applications-longhorn
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/openbao
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: configurations-gateway-api
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: configurations-cert-manager
+    namespace: flux-system
+  - name: applications-nginx-gateway-fabric
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: configurations/gateway-api
 ...
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -131,230 +317,6 @@ spec:
   prune: true
   wait: true
   path: configurations/trust-manager
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-longhorn
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/longhorn
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-nginx-gateway-fabric
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/nginx-gateway-fabric
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-openbao
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/openbao
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-external-secrets-operator
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/external-secrets-operator
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-cloudnativepg
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/cloudnativepg
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-coredns
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/coredns
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: applications-istio
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: applications/istio
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: configurations-gateway-api
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: applications-nginx-gateway-fabric
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: configurations/gateway-api
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: configurations-external-secrets-operator
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: applications-openbao
-    namespace: flux-system
-  - name: applications-external-secrets-operator
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: configurations/external-secrets-operator
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: configurations-cloudnativepg
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: applications-cloudnativepg
-    namespace: flux-system
-  - name: configurations-external-secrets-operator
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: configurations/cloudnativepg
-...
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: configurations-istio
-  namespace: flux-system
-spec:
-  dependsOn:
-  - name: applications-istio
-    namespace: flux-system
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  interval: 10m
-  timeout: 5m
-  prune: true
-  wait: true
-  path: configurations/istio
 ...
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -441,6 +403,54 @@ spec:
   prune: true
   wait: true
   path: configurations/openbao
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: configurations-external-secrets-operator
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-openbao
+    namespace: flux-system
+  - name: configurations-trust-manager
+    namespace: flux-system
+  - name: applications-external-secrets-operator
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: configurations/external-secrets-operator
+...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: configurations-cloudnativepg
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: applications-cloudnativepg
+    namespace: flux-system
+  - name: applications-longhorn
+    namespace: flux-system
+  - name: configurations-external-secrets-operator
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: configurations/cloudnativepg
 ...
 # ---
 # apiVersion: kustomize.toolkit.fluxcd.io/v1
