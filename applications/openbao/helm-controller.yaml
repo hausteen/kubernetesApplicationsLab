@@ -30,10 +30,6 @@ spec:
       tlsDisable: false
     ui:
       enabled: true
-      # serviceType: LoadBalancer
-      # annotations:
-        # lbipam.cilium.io/ips: 192.168.30.5
-        # metallb.io/loadBalancerIPs: 192.168.30.5
     csi:
       enabled: false
     injector:
@@ -486,7 +482,6 @@ spec:
             previous_key_id = "previous"
             previous_key = "file:///openbao/secrets/previous-unseal.key"
           }
-
 
     ##################################################################################################
 
