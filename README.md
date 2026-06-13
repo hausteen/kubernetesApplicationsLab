@@ -54,7 +54,7 @@ There is a clusters/\<name\>/patches/ folder that will contain the kustomization
 | 3             | configurations/gateway-api               | configurations/cert-manager, applications/nginx-gateway-fabric |
 | 4             | configurations/trust-manager             | applications/trust-manager, human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in configurations/trust-manager/bundle step 3. |
 | 4             | configurations/coredns                   | applications/coredns, configurations/gateway-api |
-| 4             | configurations/cilium/phase2             | configurations/gateway-api |
+| 4             | configurations/cilium/phase2             | applications/cilium, configurations/gateway-api |
 | 4             | configurations/longhorn                  | applications/longhorn, configurations/gateway-api |
 | 5             | applications/openbao                     | applications/longhorn, configurations/trust-manager |
 | 6             | configurations/openbao                   | applications/openbao, configurations/gateway-api |

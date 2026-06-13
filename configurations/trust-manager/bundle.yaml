@@ -16,14 +16,14 @@ spec:
       # this must be in the "trust" namespace, which is defined in the trust-manager helm chart values
   target:
     configMap:
-      key: ca.crt # nginx gateway fabric requires this key name for now
+      key: ca.crt
       # name: matches the metadata.name
       # this config map is created in every namespace
 
 # bootstrap process:
 # 1. cert-manager: creates the hunt-internal-certificate-authority certificate and secret
 # 2. trust-manager: reads the hunt-internal-certificate-authority secret and gets the tls.crt key
-# 3. human: manually creates a config map called hunt-internal-certificate-authority-previous with the key/value pair eqaul to the tls.crt key in the hunt-internal-certificate-authority secret
+# 3. human: manually creates a config map called hunt-internal-certificate-authority-previous with the key/value pair equal to the tls.crt key in the hunt-internal-certificate-authority secret
 # 3.A. human: command: kubectl create configmap hunt-internal-certificate-authority-previous -n cert-manager --from-literal=tls.crt="$(kubectl get secrets hunt-internal-certificate-authority -n cert-manager -o jsonpath='{.data.tls\.crt}' | base64 --decode)"
 # 4. trust-manager: creates the trust bundle. (both key/value pairs should be identical)
 

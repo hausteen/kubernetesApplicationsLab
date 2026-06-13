@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   certificates:
-    serverCASecret: keycloak-lab # this must be a secret. a configmap wont work here...
+    serverCASecret: keycloak-lab # this must be a secret. a configmap wont work here... put in a github feature request for configmaps
     serverTLSSecret: keycloak-lab
   bootstrap:
     initdb:

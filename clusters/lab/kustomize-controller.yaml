@@ -326,6 +326,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+  - name: applications-cilium
+    namespace: flux-system
   - name: configurations-gateway-api
     namespace: flux-system
   sourceRef:
@@ -368,9 +370,9 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-  - name: configurations-trust-manager
-    namespace: flux-system
   - name: applications-longhorn
+    namespace: flux-system
+  - name: configurations-trust-manager
     namespace: flux-system
   sourceRef:
     kind: GitRepository
@@ -412,11 +414,11 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+  - name: applications-external-secrets-operator
+    namespace: flux-system
   - name: applications-openbao
     namespace: flux-system
   - name: configurations-trust-manager
-    namespace: flux-system
-  - name: applications-external-secrets-operator
     namespace: flux-system
   sourceRef:
     kind: GitRepository
