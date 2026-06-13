@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   certificates:
-    serverCASecret: hunt-internal-trust-bundle
+    serverCASecret: keycloak-lab # this must be a secret. a configmap wont work here...
     serverTLSSecret: keycloak-lab
   bootstrap:
     initdb:
