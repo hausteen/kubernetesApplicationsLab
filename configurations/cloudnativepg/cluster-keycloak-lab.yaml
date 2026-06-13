@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   certificates:
-    serverCASecret: keycloak-lab
+    serverCASecret: hunt-internal-trust-bundle
     serverTLSSecret: keycloak-lab
   bootstrap:
     initdb:

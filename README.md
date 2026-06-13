@@ -51,15 +51,15 @@ There is a clusters/\<name\>/patches/ folder that will contain the kustomization
 | 2             | configurations/cert-manager              | applications/cert-manager |
 | 2             | configurations/istio                     | applications/istio |
 | 3             | human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in configurations/trust-manager/bundle step 3. | configurations/cert-manager |
-| 3             | applications/openbao                     | configurations/cert-manager, applications/longhorn |
 | 3             | configurations/gateway-api               | configurations/cert-manager, applications/nginx-gateway-fabric |
 | 4             | configurations/trust-manager             | applications/trust-manager, human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in configurations/trust-manager/bundle step 3. |
 | 4             | configurations/coredns                   | applications/coredns, configurations/gateway-api |
 | 4             | configurations/cilium/phase2             | configurations/gateway-api |
 | 4             | configurations/longhorn                  | applications/longhorn, configurations/gateway-api |
-| 4             | configurations/openbao                   | applications/openbao, configurations/gateway-api |
-| 5             | configurations/external-secrets-operator | applications/external-secrets-operator, applications/openbao, configurations/trust-manager |
-| 6             | configurations/cloudnativepg             | applications/cloudnativepg, applications/longhorn, configurations/external-secrets-operator |
+| 5             | applications/openbao                     | applications/longhorn, configurations/trust-manager |
+| 6             | configurations/openbao                   | applications/openbao, configurations/gateway-api |
+| 6             | configurations/external-secrets-operator | applications/external-secrets-operator, applications/openbao, configurations/trust-manager |
+| 7             | configurations/cloudnativepg             | applications/cloudnativepg, applications/longhorn, configurations/external-secrets-operator |
 
 ### For "clusters/home-staging":
 

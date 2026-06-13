@@ -74,7 +74,7 @@ spec:
         readOnly: true
       volumes:
       - name: secrets
-        projected:
+        projected: # look into clusterTrustBundle projected volumes to use here instead of a configmap for the ca trust bundle
           sources:
           - secret:
               name: openbao-current-unseal-key
@@ -84,6 +84,16 @@ spec:
               name: openbao-admin-password
           - secret:
               name: openbao-server-tls
+              items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+          - configMap:
+              name: hunt-internal-trust-bundle
+              items:
+              - key: ca.crt
+                path: ca.crt
       serviceAccount:
         name: openbao-server
       # ha:
@@ -104,21 +114,21 @@ spec:
       #       storage "raft" {
       #         path = "/openbao/data"
       #         retry_join {
-      #           leader_api_addr = "https://openbao-0.openbao-active.openbao.svc.local:8200"
+      #           leader_api_addr = "https://openbao-0.openbao-active.openbao.svc.cluster.local:8200"
       #           leader_tls_servername = "${CN}"
       #           leader_client_cert_file = "/openbao/secrets/tls.crt"
       #           leader_client_key_file = "/openbao/secrets/tls.key"
       #           leader_ca_cert_file = "/openbao/secrets/ca.crt"
       #         }
       #         retry_join {
-      #           leader_api_addr = "https://openbao-1.openbao-active.openbao.svc.local:8200"
+      #           leader_api_addr = "https://openbao-1.openbao-active.openbao.svc.cluster.local:8200"
       #           leader_tls_servername = "${CN}"
       #           leader_client_cert_file = "/openbao/secrets/tls.crt"
       #           leader_client_key_file = "/openbao/secrets/tls.key"
       #           leader_ca_cert_file = "/openbao/secrets/ca.crt"
       #         }
       #         retry_join {
-      #           leader_api_addr = "https://openbao-2.openbao-active.openbao.svc.local:8200"
+      #           leader_api_addr = "https://openbao-2.openbao-active.openbao.svc.cluster.local:8200"
       #           leader_tls_servername = "${CN}"
       #           leader_client_cert_file = "/openbao/secrets/tls.crt"
       #           leader_client_key_file = "/openbao/secrets/tls.key"
