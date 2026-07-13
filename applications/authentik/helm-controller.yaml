@@ -27,19 +27,11 @@ spec:
     namespace: flux-system
   values:
     global:
-      securityContext:
-        pod:
-          runAsNonRoot: true
-          runAsGroup: 1000
-          runAsUser: 1000
-          fsGroup: 1000
-        container:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+      securityContext: # pod level
+        runAsNonRoot: true
+        runAsGroup: 1000
+        runAsUser: 1000
+        fsGroup: 1000
       security:
         allowInsecureImages: false
       env:
@@ -64,6 +56,13 @@ spec:
         host: authentik-rw.cnpg-system.svc.cluster.local
         # port: 5432
     server:
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
       - name: secrets
         secret:
@@ -73,6 +72,13 @@ spec:
         mountPath: /secrets
         readOnly: true
     worker:
+      containerSecurityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
       - name: secrets
         secret:
