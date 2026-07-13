@@ -37,6 +37,7 @@ There is a clusters/\<name\>/patches/ folder that will contain the kustomization
 
 | Install Order | Name                                     | Depends On |
 | ------------- | ---------------------------------------- | ---------- |
+| 0             | clusters/lab/resources/namespace         | nothing |
 | 0             | applications/gateway-api-crds            | nothing |
 | 0             | applications/cilium                      | nothing |
 | 1             | applications/cert-manager                | applications/cilium |
