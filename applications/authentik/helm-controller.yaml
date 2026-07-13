@@ -74,7 +74,7 @@ spec:
       valuesKey: secret-key # the value is the output of "openssl rand 60 | base64 -w 0"
       targetPath: authentik.secret_key
     - kind: Secret
-      name: initial-admin-password-hash
+      name: authentik-initial-admin-password-hash
       valuesKey: password-hash
       targetPath: authentik.bootstrap_password_hash
 
