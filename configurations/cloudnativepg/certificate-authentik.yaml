@@ -24,16 +24,16 @@ spec:
     - hunt
   dnsNames:
   - authentik-rw
-  - authentik-rw.cnpg-system
-  - authentik-rw.cnpg-system.svc
-  - authentik-rw.cnpg-system.svc.cluster.local
+  - authentik-rw.authentik
+  - authentik-rw.authentik.svc
+  - authentik-rw.authentik.svc.cluster.local
   - authentik-r
-  - authentik-r.cnpg-system
-  - authentik-r.cnpg-system.svc
-  - authentik-r.cnpg-system.svc.cluster.local
+  - authentik-r.authentik
+  - authentik-r.authentik.svc
+  - authentik-r.authentik.svc.cluster.local
   - authentik-ro
-  - authentik-ro.cnpg-system
-  - authentik-ro.cnpg-system.svc
-  - authentik-ro.cnpg-system.svc.cluster.local
+  - authentik-ro.authentik
+  - authentik-ro.authentik.svc
+  - authentik-ro.authentik.svc.cluster.local
   duration: 720h # 30 days * 24 hours
   renewBefore: 120h # 5 days before it ends. 5 days * 24 hours
