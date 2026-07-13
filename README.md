@@ -60,6 +60,7 @@ There is a clusters/\<name\>/patches/ folder that will contain the kustomization
 | 6             | configurations/openbao                   | applications/openbao, configurations/gateway-api |
 | 6             | configurations/external-secrets-operator | applications/external-secrets-operator, applications/openbao, configurations/trust-manager |
 | 7             | configurations/cloudnativepg             | applications/cloudnativepg, applications/longhorn, configurations/external-secrets-operator |
+| 8             | applications/authentik                   | configurations/cloudnativepg |
 
 ### For "clusters/home-staging":
 

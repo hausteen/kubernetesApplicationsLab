@@ -27,5 +27,5 @@ spec:
     namespace: flux-system
   values:
     config:
-      clusterWide: false
+      clusterWide: true
     fullnameOverride: cnpg-controller-manager

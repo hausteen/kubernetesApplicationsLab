@@ -1,19 +1,19 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: keycloak-lab
-  namespace: cnpg-system
+  name: authentik
+  namespace: authentik
 spec:
   instances: 3
   certificates:
-    serverCASecret: keycloak-lab # this must be a secret. a configmap wont work here... put in a github feature request for configmaps
-    serverTLSSecret: keycloak-lab
+    serverCASecret: authentik-postgres-certificate # this must be a secret. a configmap wont work here... put in a github feature request for configmaps
+    serverTLSSecret: authentik-postgres-certificate
   bootstrap:
     initdb:
       database: app
       owner: app
       secret:
-        name: keycloak-lab-app
+        name: authentik-postgres-app-credentials
   storage:
     pvcTemplate:
       accessModes:
@@ -30,4 +30,4 @@ spec:
       login: true
       superuser: true
       passwordSecret:
-        name: keycloak-lab-admin
+        name: authentik-postgres-admin-credentials

@@ -454,6 +454,26 @@ spec:
   wait: true
   path: configurations/cloudnativepg
 ...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: applications-authentik
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: configurations-cloudnativepg
+    namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: applications/authentik
+...
 # ---
 # apiVersion: kustomize.toolkit.fluxcd.io/v1
 # kind: Kustomization

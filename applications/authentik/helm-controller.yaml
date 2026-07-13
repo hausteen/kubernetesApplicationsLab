@@ -1,0 +1,82 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: flux-system
+spec:
+  interval: 15m
+  timeout: 5m
+  install:
+    crds: Create
+    createNamespace: false
+    serverSideApply: true
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  upgrade:
+    crds: Create
+    serverSideApply: enabled
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  releaseName: authentik
+  targetNamespace: authentik
+  chartRef:
+    kind: HelmChart
+    name: authentik
+    namespace: flux-system
+  values:
+    global:
+      security:
+        allowInsecureImages: false
+      env:
+      - name: AUTHENTIK_POSTGRESQL__SSLMODE
+        value: verify-full
+      - name: AUTHENTIK_POSTGRESQL__SSLROOTCERT
+        valueFrom:
+          configMapKeyRef:
+            name: hunt-internal-trust-bundle
+            key: ca.crt
+    authentik:
+      # secret_key: "" # this is merged with the valuesFrom down below.
+      error_reporting:
+        enabled: false
+      disable_update_check: true
+      disable_startup_analytics: true
+      # bootstrap_password_hash: "" # this is merged with the valuesFrom down below.
+      postgresql:
+        name: app # this is the database name
+        user: file:///secrets/username
+        password: file:///secrets/password
+        host: authentik-rw.cnpg-system.svc.cluster.local
+        # port: 5432
+    server:
+      volumes:
+      - name: secrets
+        secret:
+          secretName: authentik-postgres-app-credentials
+      volumeMounts:
+      - name: secrets
+        mountPath: /secrets
+        readOnly: true
+    worker:
+      volumes:
+      - name: secrets
+        secret:
+          secretName: authentik-postgres-app-credentials
+      volumeMounts:
+      - name: secrets
+        mountPath: /secrets
+        readOnly: true
+  valuesFrom:
+    - kind: Secret
+      name: authentik-server-secret-key
+      valuesKey: secret-key # the value is the output of "openssl rand 60 | base64 -w 0"
+      targetPath: authentik.secret_key
+    - kind: Secret
+      name: initial-admin-password-hash
+      valuesKey: password-hash
+      targetPath: authentik.bootstrap_password_hash
+
+# custom certificate for the https endpoint?   https://docs.goauthentik.io/sys-mgmt/certificates/#external-certificates
+# disable the http endpoint? I don't think we can yet per their docs...
