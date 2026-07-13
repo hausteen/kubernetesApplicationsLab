@@ -27,6 +27,19 @@ spec:
     namespace: flux-system
   values:
     global:
+      securityContext:
+        pod:
+          runAsNonRoot: true
+          runAsGroup: 1000
+          runAsUser: 1000
+          fsGroup: 1000
+        container:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
       security:
         allowInsecureImages: false
       env:
