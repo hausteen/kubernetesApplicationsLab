@@ -38,10 +38,7 @@ spec:
       - name: AUTHENTIK_POSTGRESQL__SSLMODE
         value: verify-full
       - name: AUTHENTIK_POSTGRESQL__SSLROOTCERT
-        valueFrom:
-          configMapKeyRef:
-            name: hunt-internal-trust-bundle
-            key: ca.crt
+        value: /certs/ca.crt
     authentik:
       # secret_key: "" # this is merged with the valuesFrom down below.
       error_reporting:
@@ -67,9 +64,20 @@ spec:
       - name: secrets
         secret:
           secretName: authentik-postgres-app-credentials
+      - name: certificates
+        projected:
+          sources:
+          - configMap:
+              name: hunt-internal-trust-bundle
+              items:
+              - key: ca.crt
+                path: ca.crt
       volumeMounts:
       - name: secrets
         mountPath: /secrets
+        readOnly: true
+      - name: certificates
+        mountPath: /certs
         readOnly: true
     worker:
       containerSecurityContext:
@@ -83,9 +91,20 @@ spec:
       - name: secrets
         secret:
           secretName: authentik-postgres-app-credentials
+      - name: certificates
+        projected:
+          sources:
+          - configMap:
+              name: hunt-internal-trust-bundle
+              items:
+              - key: ca.crt
+                path: ca.crt
       volumeMounts:
       - name: secrets
         mountPath: /secrets
+        readOnly: true
+      - name: certificates
+        mountPath: /certs
         readOnly: true
   valuesFrom:
     - kind: Secret
