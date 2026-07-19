@@ -5,4 +5,4 @@ resources:
 # - resources/gateway-class.yaml # not needed when using nginx-gateway-fabric
 - resources/nginx-proxy.yaml
 - resources/gateway.yaml
-- resources/http-route.yaml
+# - resources/http-route.yaml
