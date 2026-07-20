@@ -105,6 +105,3 @@ Read the clusters/overlays/name/resources/kustomize-controller.yaml file in orde
 | 5             | openbao-install                           | manifests/openbao/install/overlays/lab                              | longhorn-install, trust-manager-post-install |
 | 6             | openbao-post-install                      | manifests/openbao/post-install/overlays/lab                         | openbao-install, nginx-gateway-fabric-post-install |
 | 6             | external-secrets-operator-post-install    | manifests/external-secrets-operator/post-install/overlays/lab       | external-secrets-operator-install, openbao-install, trust-manager-post-install |
-| 6             | authentik-pre-install                     | manifests/authentik/pre-install/overlays/lab                        | external-secrets-operator-post-install |
-| 7             | cloudnativepg-post-install                | manifests/cloudnativepg/post-install/overlays/lab                   | cloudnativepg-install, longhorn-install, cert-manager-post-install, authentik-pre-install |
-| 8             | authentik-install                         | manifests/authentik/install/overlays/lab                            | cloudnativepg-post-install |
