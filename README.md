@@ -96,9 +96,8 @@ Read the clusters/overlays/name/resources/kustomize-controller.yaml file in orde
 | 2             | trust-manager-install                     | manifests/trust-manager/install/overlays/lab                        | cert-manager-install |
 | 2             | cert-manager-post-install                 | manifests/cert-manager/post-install/overlays/lab                    | cert-manager-install |
 | 2             | istio-post-install                        | manifests/istio/post-install/overlays/lab                           | istio-install |
-| 3             | human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. the command is in manifests/trust-manager/post-install/overlays/lab/resources/bundle.yaml step 3. | | cert-manager-post-install |
 | 3             | nginx-gateway-fabric-post-install         | manifests/nginx-gateway-fabric/post-install/overlays/lab            | cert-manager-post-install, nginx-gateway-fabric-install |
-| 4             | trust-manager-post-install                | manifests/trust-manager/post-install/overlays/lab                   | trust-manager-install, human manually creates the copy of the hunt-internal-certificate-authority for trust-manager. |
+| 4             | trust-manager-post-install                | manifests/trust-manager/post-install/overlays/lab                   | trust-manager-install |
 | 4             | coredns-post-install                      | manifests/coredns/post-install/overlays/lab                         | coredns-install, nginx-gateway-fabric-post-install |
 | 4             | cilium-post-install-2                     | manifests/cilium/post-install-2/overlays/lab                        | cilium-install, nginx-gateway-fabric-post-install |
 | 4             | longhorn-post-install                     | manifests/longhorn/post-install/overlays/lab                        | longhorn-install, nginx-gateway-fabric-post-install |

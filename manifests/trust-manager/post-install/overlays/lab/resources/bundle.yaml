@@ -20,16 +20,17 @@ spec:
       # name: matches the metadata.name
       # this config map is created in every namespace
 
-# bootstrap process:
-# 1. cert-manager: creates the hunt-internal-certificate-authority certificate and secret
-# 2. trust-manager: reads the hunt-internal-certificate-authority secret and gets the ca.crt key
-# 3. human: manually creates a config map called hunt-internal-certificate-authority-previous with the key/value pair equal to the ca.crt key in the hunt-internal-certificate-authority secret
-# 3.A. human: command: kubectl create configmap hunt-internal-certificate-authority-previous -n cert-manager --from-literal=ca.crt="$(kubectl get secrets hunt-internal-certificate-authority -n cert-manager -o jsonpath='{.data.ca\.crt}' | base64 --decode)"
-# 4. trust-manager: creates the trust bundle. (both key/value pairs should be identical)
+# bootstrap process (steps 1-4 automated):
+# 1. opentofu creates a configmap called hunt-internal-certificate-authority-previous with key "ca.crt" and value (a random tls.key). the value doesn't matter. 
+# 2. cert-manager: creates the hunt-internal-certificate-authority certificate and secret
+# 4. trust-manager: creates the trust bundle using the secret and configmap. (the key/value pairs will be different)
+# 5. human: after the cluster bootstrap is finished, follow the certificate rotation process so that both key/value pairs are the same.
+# 5.A. human: command: kubectl patch configmap hunt-internal-certificate-authority-previous -n cert-manager -p "{\"data\":{\"ca.crt\":\"$(kubectl get secrets hunt-internal-certificate-authority -n cert-manager -o jsonpath='{.data.ca\.crt}' | base64 --decode)\"}}"
 
 # certificate rotation:
 # 1. cert-manager: creates the new hunt-internal-certificate-authority certificate and secret automatically once the renew time comes
 # 2. trust-manager: updates the trust bundle with the new key/value pair. (the key/value pairs will no longer be identical in the trust bundle)
 # 3. human: monitors the environment and updates the various applications to use the updated trust bundle.
 # 4. human: once all applications are updated and using the new trust bundle, the human updates hunt-internal-certificate-authority-previous to have the same key/value pair as hunt-internal-certificate-authority.
+# 4.A. human: command: kubectl patch configmap hunt-internal-certificate-authority-previous -n cert-manager -p "{\"data\":{\"ca.crt\":\"$(kubectl get secrets hunt-internal-certificate-authority -n cert-manager -o jsonpath='{.data.ca\.crt}' | base64 --decode)\"}}"
 # 5. trust-manager: updates the trust bundle. (both key/value pairs should be identical)
