@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+  namespace: flux-system
+spec:
+  interval: 15m
+  timeout: 5m
+  install:
+    crds: CreateReplace
+    createNamespace: false
+    serverSideApply: true
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  upgrade:
+    crds: CreateReplace
+    serverSideApply: enabled
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  releaseName: cilium
+  targetNamespace: kube-system
+  chartRef:
+    kind: OCIRepository
+    name: cilium
+    namespace: flux-system
+  values: # for flux to take initial ownership cleanly, the values must exactly match the values which opentofu set.
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: /sys/fs/cgroup
+    ipam:
+      mode: kubernetes
+    kubeProxyReplacement: true
+    kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+    securityContext:
+      capabilities:
+        ciliumAgent:
+        - CHOWN
+        - DAC_OVERRIDE
+        - FOWNER
+        - IPC_LOCK
+        - KILL
+        - NET_ADMIN
+        - NET_RAW
+        - SETGID
+        - SETUID
+        - SYS_ADMIN
+        - SYS_RESOURCE
+        cleanCiliumState:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_RESOURCE
+    k8sServiceHost: localhost
+    k8sServicePort: 7445
+    # above are the required values for talos linux.
+    # below are the values that set up a minimal install of cilium.
+    # its easier to add items later through gitops than to remove items after they've been installed.
+    gatewayAPI:
+      enabled: false
+    l7Proxy: false
+    hubble:
+      enabled: false
+      relay:
+        enabled: false
+      ui:
+        enabled: false
