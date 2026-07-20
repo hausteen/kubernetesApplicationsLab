@@ -76,6 +76,8 @@ During cluster bootstrap, I install Flux Operator. I give it a Flux Instance fil
 
 Read the clusters/overlays/name/resources/kustomize-controller.yaml file in order to see what is in each cluster. It should match the below tables for each cluster.
 
+If the cluster installs trust-manager and sets up a trust bundle automatically, you need to perform a certificate rotation after the bootstrap is done. The previous certificate is a dummy certificate to allow for automated bootstrapping. The command is in the trust bundle file found in trust-manager's folder.
+
 ## Installation
 
 ### For "clusters/overlays/lab":
