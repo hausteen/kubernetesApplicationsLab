@@ -57,10 +57,10 @@ git-repository
                         resources
 ```
 
-Question: Where to put files?
+Question: Where to put files?  
 Answer: Try and keep all code for an application in the same manifest's folder so that way its easy to remove any piece of code. For example: Keycloak needs a postgress database, a certificate, a realm file, a httproute, etc. All go in the manifests/keycloak folder.
 
-Question: Why are there so many base and overlay folders?
+Question: Why are there so many base and overlay folders?  
 Answer: This is strategic. It allows me to:
 - set up fully independent clusters.
 - control software dependency installation order easily by using software name and time (the pre-install, install, post-install folders)
