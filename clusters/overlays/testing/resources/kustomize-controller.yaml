@@ -52,3 +52,20 @@ spec:
   wait: true
   path: manifests/nginx-gateway-fabric/pre-install/overlays/lab
 ...
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cilium-install-2
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  interval: 10m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: manifests/cilium/install-2/overlays/lab
+...
