@@ -39,7 +39,7 @@ metadata:
   name: nginx-gateway-fabric-pre-install
   namespace: flux-system
 spec:
-  dependsOn:
+ dependsOn:
   - name: cilium-install-1
     namespace: flux-system
   sourceRef:
