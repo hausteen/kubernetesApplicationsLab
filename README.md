@@ -102,10 +102,11 @@ If the cluster installs trust-manager and sets up a trust bundle automatically, 
 | 2             | cert-manager-post-install                 | manifests/cert-manager/post-install/overlays/lab                    | cert-manager-install |
 | 2             | istio-post-install                        | manifests/istio/post-install/overlays/lab                           | istio-install |
 | 3             | nginx-gateway-fabric-post-install         | manifests/nginx-gateway-fabric/post-install/overlays/lab            | cert-manager-post-install, nginx-gateway-fabric-install |
-| 4             | trust-manager-post-install                | manifests/trust-manager/post-install/overlays/lab                   | trust-manager-install |
+| 4             | trust-manager-post-install                | manifests/trust-manager/post-install/overlays/lab                   | cert-manager-post-install, trust-manager-install |
 | 4             | coredns-post-install                      | manifests/coredns/post-install/overlays/lab                         | coredns-install, nginx-gateway-fabric-post-install |
 | 4             | cilium-post-install-2                     | manifests/cilium/post-install-2/overlays/lab                        | cilium-install, nginx-gateway-fabric-post-install |
 | 4             | longhorn-post-install                     | manifests/longhorn/post-install/overlays/lab                        | longhorn-install, nginx-gateway-fabric-post-install |
-| 5             | openbao-install                           | manifests/openbao/install/overlays/lab                              | longhorn-install, trust-manager-post-install |
+| 4             | openbao-pre-install                       | manifests/openbao/pre-install/overlays/lab                          | cert-manager-post-install, trust-manager-post-install |
+| 5             | openbao-install                           | manifests/openbao/install/overlays/lab                              | longhorn-install, openbao-pre-install |
 | 6             | openbao-post-install                      | manifests/openbao/post-install/overlays/lab                         | openbao-install, nginx-gateway-fabric-post-install |
 | 6             | external-secrets-operator-post-install    | manifests/external-secrets-operator/post-install/overlays/lab       | external-secrets-operator-install, openbao-install, trust-manager-post-install |
